@@ -1,10 +1,8 @@
+const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
-const MediaSchema = new Schema({
-  name: String,
-  password: String,
-  email: String,
-});
+const MediaSchema = new Schema({});
 
-const MediaModel = mongoose.model("medias", UserSchema);
+const MediaModel = mongoose.model("medias", MediaSchema);
 module.exports = MediaModel;

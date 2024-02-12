@@ -1,10 +1,8 @@
+const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
-const VoteSchema = new Schema({
-  name: String,
-  password: String,
-  email: String,
-});
+const VoteSchema = new Schema({});
 
-const VoteModel = mongoose.model("votes", UserSchema);
+const VoteModel = mongoose.model("votes", VoteSchema);
 module.exports = VoteModel;

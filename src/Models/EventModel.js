@@ -1,10 +1,8 @@
+const mongoose = require("mongoose");
+
 const Schema = mongoose.Schema;
 
-const EventSchema = new Schema({
-  name: String,
-  password: String,
-  email: String,
-});
+const EventSchema = new Schema({});
 
-const EventModel = mongoose.model("events", UserSchema);
+const EventModel = mongoose.model("events", EventSchema);
 module.exports = EventModel;
