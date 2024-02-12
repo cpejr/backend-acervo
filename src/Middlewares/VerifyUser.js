@@ -8,4 +8,4 @@ function verifyUser(req, res, next) {
   next();
 }
 
-module.exports = verifyUser;
+export default verifyUser;

@@ -1,4 +1,4 @@
-const VoteModel = require("../Models/VoteModel");
+import VoteModel from "Models/VoteModel.js";
 
 class VoteController {
   async create(req, res) {
@@ -19,4 +19,5 @@ class VoteController {
     // return res.status(200).json({ mensagem: "Voto Deletado com sucesso!" });
   }
 }
-module.exports = new VoteController();
+
+export default new VoteController();

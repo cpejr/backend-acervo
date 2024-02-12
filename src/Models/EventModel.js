@@ -1,8 +1,9 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({});
 
 const EventModel = mongoose.model("events", EventSchema);
-module.exports = EventModel;
+
+export default EventModel;

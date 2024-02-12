@@ -1,4 +1,4 @@
-const MediaModel = require("../Models/MediaModel");
+import MediaModel from "Models/MediaModel.js";
 
 class MediaController {
   async create(req, res) {

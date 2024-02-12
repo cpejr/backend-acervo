@@ -1,4 +1,4 @@
-const UserModel = require("../Models/UserModel");
+import UserModel from "Models/UserModel.js";
 
 class UserController {
   async create(req, res) {
@@ -19,4 +19,4 @@ class UserController {
     // return res.status(200).json({ mensagem: "Usuário Deletado com sucesso!" });
   }
 }
-module.exports = new UserController();
+export default new UserController();

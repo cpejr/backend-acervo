@@ -1,5 +1,4 @@
-const EventModel = require("../Models/EventModel");
-
+import EventModel from "Models/EventModel.js";
 class EventController {
   async create(req, res) {
     // const event = await EventModel.create(req.body);
@@ -19,4 +18,4 @@ class EventController {
     // return res.status(200).json({ mensagem: "Evento Deletado com sucesso!" });
   }
 }
-module.exports = new EventController();
+export default new EventController();

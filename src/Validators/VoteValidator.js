@@ -1,5 +1,5 @@
-const { z } = require("zod");
-const { validateRequest } = require("zod-express-middleware");
+import { z } from "zod";
+import { validateRequest } from "zod-express-middleware";
 
 const create = validateRequest({});
 const destroy = validateRequest({});

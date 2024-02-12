@@ -8,4 +8,4 @@ function verifyIsAdm(req, res, next) {
   });
 }
 
-module.exports = verifyIsAdm;
+export default verifyIsAdm;
