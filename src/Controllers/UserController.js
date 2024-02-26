@@ -1,4 +1,5 @@
 import UserModel from "Models/UserModel.js";
+import { Jwt } from "jsonwebtoken";
 
 class UserController {
   async create(req, res) {
@@ -55,7 +56,7 @@ class UserController {
       res.status(500).json({ message: "ERRO", error: error.message });
     }
   }
-  async delete(req, res) {
+  async destroy(req, res) {
     try {
       const { id } = req.params;
 
