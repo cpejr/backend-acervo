@@ -6,9 +6,7 @@ const userRoutes = Router();
 
 userRoutes.get("/userImage/:id", UserController.takeImage);
 
-userRoutes.route("/getAll").get(UserController.readAll);
-
-userRoutes.route("/").post(UserValidator.create, UserController.create);
+userRoutes.route("/").post(UserValidator.create, UserController.create).get(UserController.readAll);
 
 userRoutes
   .route("/:id")
