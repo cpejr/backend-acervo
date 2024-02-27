@@ -1,5 +1,5 @@
-import UserModel from "Models/UserModel.js";
-import { Jwt } from "jsonwebtoken";
+import UserModel from "../Models/UserModel.js";
+import jwt from "jsonwebtoken";
 
 class UserController {
   async create(req, res) {
@@ -41,7 +41,7 @@ class UserController {
       const User = await UserModel.find();
       res.status(200).json(User);
     } catch (error) {
-      res.status(500).json({ message: "Erro while fethcing Users", error: error.message });
+      res.status(500).json({ message: "Error while fethcing Users", error: error.message });
     }
   }
   async update(req, res) {
@@ -96,7 +96,7 @@ class UserController {
   async takeImage(req, res) {
     const { id } = req.params;
 
-    const user = await userModel.findOne({ _id: id });
+    const user = await UserModel.findOne({ _id: id });
 
     let result;
 

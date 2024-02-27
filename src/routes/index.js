@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import userRoutes from "./EventRoutes.js";
+import userRoutes from "./UserRoutes.js";
 import eventRoutes from "./EventRoutes.js";
 import mediaRoutes from "./MediaRoutes.js";
 import voteRoutes from "./VoteRotes.js";
