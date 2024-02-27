@@ -4,6 +4,8 @@ import UserValidator from "../Validators/UserValidator.js";
 
 const userRoutes = Router();
 
+userRoutes.get("/userImage/:id", UserController.takeImage);
+
 userRoutes.route("/getAll").get(UserController.readAll);
 
 userRoutes.route("/").post(UserValidator.create, UserController.create);
@@ -13,7 +15,5 @@ userRoutes
   .get(UserController.read)
   .delete(UserValidator.destroy, UserController.destroy)
   .put(UserValidator.update, UserController.update);
-
-userRoutes.get("/userImage/:id", UserController.takeImage);
 
 export default userRoutes;

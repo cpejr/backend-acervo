@@ -76,7 +76,7 @@ class UserController {
     const { id } = req.params;
     if (!id) return;
 
-    const user = await userModel.findOne({ _id: id });
+    const user = await UserModel.findOne({ _id: id });
     if (user.avatar_url) {
       const imageKey = user.avatar_url;
       await takeFile(imageKey);
