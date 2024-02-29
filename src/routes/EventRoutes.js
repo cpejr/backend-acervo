@@ -4,9 +4,12 @@ import EventController from "../Controllers/EventController.js";
 
 const eventRoutes = Router();
 
-eventRoutes.get("/get/:id", EventValidator.read, EventController.read);
-eventRoutes.post("/create", EventValidator.create, EventController.create);
-eventRoutes.put("/edit/:id", EventValidator.update, EventController.update);
-eventRoutes.delete ("/delete/:id", EventValidator.destroy, EventController.delete);
+eventRoutes.route("/").post(EventValidator.create, EventController.create);
+
+eventRoutes
+  .route("/:id")
+  .get(EventValidator.read, EventController.read)
+  .put(EventValidator.update, EventController.update)
+  .delete(EventValidator.destroy, EventController.delete);
 
 export default eventRoutes;

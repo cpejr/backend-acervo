@@ -29,7 +29,7 @@ class EventController {
     try {
       const { id } = req.params;
       await EventModel.findByIdAndDelete(id);
-      return res.status(200).json({ mensagem: "Evento Deletado com sucesso!" });
+      return res.status(200).json({ messsage: "Event deleted successfully!" });
     } catch (error) {
       res.status(500).json({ message: "Error while deleting event", error: error.message });
     }
