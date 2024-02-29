@@ -4,10 +4,7 @@ import UserValidator from "../Validators/UserValidator.js";
 
 const userRoutes = Router();
 
-userRoutes
-  .route("/")
-  .post(UserValidator.create, UserController.create)
-  .get(UserValidator.get, UserController.readAll);
+userRoutes.route("/").post(UserValidator.create, UserController.create).get(UserController.readAll);
 
 userRoutes
   .route("/:id")
