@@ -7,6 +7,7 @@ const get = validateRequest({
     id: z.custom(mongoose.isValidObjectId, "O ID não é válido"),
   }),
 });
+
 const create = validateRequest({
   body: z.object({
     name: z.string({ required_error: "O nome é obrigatório" }),
@@ -15,11 +16,13 @@ const create = validateRequest({
     type: z.string({ required_error: "O tipo é obrigatório" }),
   }),
 });
+
 const destroy = validateRequest({
   params: z.object({
     id: z.custom(mongoose.isValidObjectId, "O ID não é válido"),
   }),
 });
+
 const update = validateRequest({
   body: z.object({
     name: z.string().optional(),
