@@ -8,7 +8,7 @@ const memorialRoutes = Router();
 
 memorialRoutes
   .route("/")
-  .post(verifyIsAdm, verifyJwt, MemorialController.create, MemorialValidator.create)
+  .post(verifyIsAdm, verifyJwt, MemorialValidator.create, MemorialController.create)
   .get(verifyIsAdm, verifyJwt, MemorialValidator.read, MemorialController.read);
 
 memorialRoutes

@@ -1,9 +1,9 @@
 import MemorialModel from "../Models/MemorialModel.js";
 
 class MemorialController {
-  async create(res, req) {
+  async create(req, res) {
     try {
-      const memorial = await MemorialModel.create(req.body);
+      const memorial = await MemorialModel.create(req);
       return res.status(200).json(memorial);
     } catch (error) {
       res.status(500).json({ message: "Error while creating archive", error: error.message });
