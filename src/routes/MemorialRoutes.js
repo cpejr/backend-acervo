@@ -2,7 +2,7 @@ import { Router } from "express";
 import MemorialController from "../Controllers/MemorialController.js";
 import MemorialValidator from "../Validators/MemorialValidator.js";
 import verifyJwt from "../Middlewares/VerifyJwt.js";
-import verifyIsAdm from "Middlewares/VerifyisAdm.js";
+import verifyIsAdm from "../Middlewares/VerifyisAdm.js";
 
 const memorialRoutes = Router();
 

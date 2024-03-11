@@ -1,4 +1,4 @@
-import MemorialModel from "Models/MemorialModel.js";
+import MemorialModel from "../Models/MemorialModel.js";
 
 class MemorialController {
   async create(res, req) {
