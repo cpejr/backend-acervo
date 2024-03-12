@@ -3,13 +3,13 @@ import MemorialModel from "../Models/MemorialModel.js";
 class MemorialController {
   async create(req, res) {
     try {
-      const memorial = await MemorialModel.create(req);
+      const memorial = await MemorialModel.create(req.body);
       return res.status(200).json(memorial);
     } catch (error) {
       res.status(500).json({ message: "Error while creating archive", error: error.message });
     }
   }
-  async read(res) {
+  async read(req, res) {
     try {
       const memorial = await MemorialModel.find();
       return res.status(200).json(memorial);
@@ -19,6 +19,7 @@ class MemorialController {
   }
   async update(req, res) {
     try {
+      console.log(req);
       const { id } = req.params;
       const memorial = await MemorialModel.findByIdAndUpdate(id, req.body);
       return res.status(200).json(memorial);
