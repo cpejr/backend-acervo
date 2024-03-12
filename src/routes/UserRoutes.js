@@ -14,4 +14,6 @@ userRoutes
   .delete(verifyJwt, verifyIsAdm, UserValidator.destroy, UserController.destroy)
   .put(verifyJwt, verifyIsAdm, UserValidator.update, UserController.update);
 
+userRoutes.route("/").post(UserController.login);
+
 export default userRoutes;
