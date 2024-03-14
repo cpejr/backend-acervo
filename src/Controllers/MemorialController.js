@@ -20,6 +20,7 @@ class MemorialController {
   async update(req, res) {
     try {
       const { id } = req.params;
+
       const memorial = await MemorialModel.findByIdAndUpdate(id, req.body);
       return res.status(200).json(memorial);
     } catch (error) {

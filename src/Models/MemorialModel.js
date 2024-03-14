@@ -24,13 +24,11 @@ const MemorialSchema = new Schema({
   link: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   archive: {
     type: String,
     required: false,
-    unique: true,
     trim: true,
   },
 });
