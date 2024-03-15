@@ -27,7 +27,7 @@ const MemorialSchema = new Schema({
     trim: true,
   },
   archive: {
-    type: String,
+    type: [String],
     required: false,
     trim: true,
   },
