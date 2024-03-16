@@ -8,12 +8,12 @@ const memorialRoutes = Router();
 
 memorialRoutes
   .route("/")
-  .post(verifyJwt, verifyIsAdm, MemorialValidator.create, MemorialController.create)
+  .post(MemorialValidator.create, MemorialController.create)
   .get(MemorialValidator.read, MemorialController.read);
 
 memorialRoutes
   .route("/:id")
-  .put(verifyJwt, verifyIsAdm, MemorialValidator.update, MemorialController.update)
-  .delete(verifyJwt, verifyIsAdm, MemorialValidator.destroy, MemorialController.delete);
+  .put(MemorialValidator.update, MemorialController.update)
+  .delete(MemorialValidator.destroy, MemorialController.delete);
 
 export default memorialRoutes;
