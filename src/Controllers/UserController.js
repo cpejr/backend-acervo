@@ -32,7 +32,7 @@ class UserController {
       const user = await UserModel.findById(id);
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: "ERRO", error: error.message });
+      res.status(500).json({ message: "Error while fetching User", error: error.message });
     }
   }
 
@@ -41,7 +41,7 @@ class UserController {
       const user = await UserModel.find();
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: "Error while fethcing Users", error: error.message });
+      res.status(500).json({ message: "Error while fetching Users", error: error.message });
     }
   }
 

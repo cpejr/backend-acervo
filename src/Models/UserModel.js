@@ -20,9 +20,8 @@ const UserSchema = new Schema({
   },
   type: {
     type: Boolean,
-    require: false,
+    required: false,
     default: false,
-    trim: true,
   },
 });
 
