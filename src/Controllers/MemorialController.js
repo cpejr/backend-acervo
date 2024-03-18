@@ -5,13 +5,13 @@ class MemorialController {
     try {
       const { title, shortDescription, longDescription, link, ...archives } = req.body;
       const archivesArray = Object.values(archives);
-      console.log(archivesArray);
+
       const memorial = await MemorialModel.create({
         title,
         shortDescription,
         longDescription,
         link,
-        archives: archivesArray,
+        archive: archivesArray,
       });
       return res.status(200).json(memorial);
     } catch (error) {
@@ -30,8 +30,13 @@ class MemorialController {
   async update(req, res) {
     try {
       const { id } = req.params;
-
-      const memorial = await MemorialModel.findByIdAndUpdate(id, req.body);
+      const { title, link, ...archives } = req.body;
+      const archivesArray = Object.values(archives);
+      const memorial = await MemorialModel.findByIdAndUpdate(id, {
+        title,
+        link,
+        archive: archivesArray,
+      });
       return res.status(200).json(memorial);
     } catch (error) {
       res.status(500).json({ message: "Error while updating archive", error: error.message });
