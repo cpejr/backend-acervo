@@ -3,6 +3,20 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const EventSchema = new Schema({
+  id_categoryType: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "categories1",
+      required: true,
+    },
+  ],
+  id_categoryPrice: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "categories1",
+      required: true,
+    },
+  ],
   name: {
     type: String,
     required: true,
@@ -20,6 +34,11 @@ const EventSchema = new Schema({
     trim: true,
   },
   longDescription: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  link: {
     type: String,
     required: true,
     trim: true,
