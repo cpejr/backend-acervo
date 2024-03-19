@@ -14,6 +14,6 @@ eventRoutes
   .put(EventValidator.update, EventController.update)
   .delete(EventValidator.destroy, EventController.delete);
 
-eventRoutes.get("/search-by-name", EventController.readByName);
+eventRoutes.get("/search-by-category", EventController.filterCategories);
 
 export default eventRoutes;
