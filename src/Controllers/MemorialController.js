@@ -15,7 +15,6 @@ class MemorialController {
       });
       return res.status(200).json(memorial);
     } catch (error) {
-      console.log(error);
       res.status(500).json({ message: "Error while creating archive", error: error.message });
     }
   }
