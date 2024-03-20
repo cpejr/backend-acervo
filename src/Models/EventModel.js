@@ -6,14 +6,14 @@ const EventSchema = new Schema({
   id_categoryType: [
     {
       type: Schema.Types.ObjectId,
-      ref: "categories1",
+      ref: "categoryType",
       required: true,
     },
   ],
   id_categoryPrice: [
     {
       type: Schema.Types.ObjectId,
-      ref: "categories1",
+      ref: "categoryPrice",
       required: true,
     },
   ],

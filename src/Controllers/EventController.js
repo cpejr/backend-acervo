@@ -2,8 +2,31 @@ import { Model } from "mongoose";
 import EventModel from "../Models/EventModel.js";
 class EventController {
   async create(req, res) {
+    console.log(req);
     try {
-      const event = await EventModel.create(req.body);
+      const { id_categoryPrice, id_categoryType, ...rest } = req.body;
+      const categoryPrices = await Promise.all(
+        id_categoryPrice.map(async (id) => await CategoryPricesModel.findById(id))
+      );
+
+      const categoryTypes = await Promise.all(
+        id_categoryType.map(async (id) => await CategoryPricesModel.findById(id))
+      );
+      if (categoryTypes.includes(null) || categoryPrices.includes(null)) {
+        return res.status(400).json({ message: "One or more category IDs do not exist" });
+      }
+
+      const event = await EventModel.create({
+        id_categoryPrice: id_categoryPrice,
+        id_categoryType: id_categoryType,
+        ...rest,
+        imageURL: "",
+      });
+      //save image url
+      const { imageURL: base64Image, name } = req.body;
+      const imageURL = await uploadImage(base64Image, name);
+      event.set({ imageURL });
+      await event.save();
       return res.status(200).json(event);
     } catch (error) {
       res.status(500).json({ message: "Error while creating event", error: error.message });
@@ -11,7 +34,9 @@ class EventController {
   }
   async read(req, res) {
     try {
-      const event = await EventModel.find();
+      const event = await EventModel.find(req.body)
+        .populate("id_categoryPrice")
+        .populate("id_categoryType");
       return res.status(200).json(event);
     } catch (error) {
       res.status(500).json({ message: "Error while fetching event", error: error.message });
@@ -40,12 +65,9 @@ class EventController {
     try {
       let idsArray = [];
       const { id, name, type } = req.query;
-      console.log(id);
-      console.log(name);
-      console.log(type);
 
       if (id) {
-        idsArray = id.split(",");
+        idsArray = id;
       }
 
       let events = [];
@@ -54,20 +76,20 @@ class EventController {
         events = await EventModel.find();
       } else {
         const query = {
-          $or: [{ id_categoryprices: { $in: idsArray } }, { id_categorytypes: { $in: idsArray } }],
+          $or: [{ id_categoryPrice: { $in: idsArray } }, { id_categoryType: { $in: idsArray } }],
         };
         events = await EventModel.find(query);
       }
-      const populatePromises = events.map(async (tool) => {
-        const populatedTool = await EventModel.populate(tool, "id_categoryprices id_categorytypes");
-        return populatedTool;
+      const populatePromises = events.map(async (event) => {
+        const populatedEvent = await EventModel.populate(event, "id_categoryPrice id_categoryType");
+        return populatedEvent;
       });
 
       events = await Promise.all(populatePromises);
 
       if (name) {
         const regexName = new RegExp(name, "i");
-        events = events.filter((tool) => regexName.test(tool.name));
+        events = events.filter((event) => regexName.test(event.name));
       }
       switch (type) {
         case "name":
@@ -88,7 +110,7 @@ class EventController {
           events = OrderedTime;
           break;
       }
-      const uniqueToolObjects = () => {
+      const uniqueEventObjects = () => {
         const mapIds = new Map();
         const UniqueArray = [];
         events.forEach((obj) => {
@@ -100,7 +122,7 @@ class EventController {
         return UniqueArray;
       };
 
-      const filteredEvents = uniqueToolObjects();
+      const filteredEvents = uniqueEventObjects();
 
       return res.status(200).json(filteredEvents);
     } catch (error) {
