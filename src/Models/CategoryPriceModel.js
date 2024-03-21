@@ -21,5 +21,5 @@ CategoryPriceSchema.virtual("categoryPrice", {
   options: { lean: true },
 });
 
-const CategoryModel = mongoose.model("categoryPrice", CategoryPriceSchema);
-export default CategoryModel;
+const CategoryPriceModel = mongoose.model("categoryPrice", CategoryPriceSchema);
+export default CategoryPriceModel;

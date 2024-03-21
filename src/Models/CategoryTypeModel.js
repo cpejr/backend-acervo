@@ -21,5 +21,5 @@ CategoryTypeSchema.virtual("categoryType", {
   options: { lean: true },
 });
 
-const CategoryModel = mongoose.model("categoryType", CategoryTypeSchema);
-export default CategoryModel;
+const CategoryTypeModel = mongoose.model("categoryType", CategoryTypeSchema);
+export default CategoryTypeModel;

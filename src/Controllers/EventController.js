@@ -1,16 +1,17 @@
 import { Model } from "mongoose";
 import EventModel from "../Models/EventModel.js";
+import CategoryPriceModel from "../Models/CategoryPriceModel.js";
+import CategoryTypeModel from "../Models/CategoryTypeModel.js";
 class EventController {
   async create(req, res) {
-    console.log(req);
     try {
       const { id_categoryPrice, id_categoryType, ...rest } = req.body;
       const categoryPrices = await Promise.all(
-        id_categoryPrice.map(async (id) => await CategoryPricesModel.findById(id))
+        id_categoryPrice.map(async (id) => await CategoryPriceModel.findById(id))
       );
 
       const categoryTypes = await Promise.all(
-        id_categoryType.map(async (id) => await CategoryPricesModel.findById(id))
+        id_categoryType.map(async (id) => await CategoryTypeModel.findById(id))
       );
       if (categoryTypes.includes(null) || categoryPrices.includes(null)) {
         return res.status(400).json({ message: "One or more category IDs do not exist" });
@@ -20,13 +21,8 @@ class EventController {
         id_categoryPrice: id_categoryPrice,
         id_categoryType: id_categoryType,
         ...rest,
-        imageURL: "",
       });
-      //save image url
-      const { imageURL: base64Image, name } = req.body;
-      const imageURL = await uploadImage(base64Image, name);
-      event.set({ imageURL });
-      await event.save();
+
       return res.status(200).json(event);
     } catch (error) {
       res.status(500).json({ message: "Error while creating event", error: error.message });

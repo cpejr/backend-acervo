@@ -1,8 +1,8 @@
-import CategoryModel from "../Models/CategoryPriceModel.js";
+import CategoryPriceModel from "../Models/CategoryPriceModel.js";
 class CategoryController {
   async create(req, res) {
     try {
-      const category = await CategoryModel.create(req.body);
+      const category = await CategoryPriceModel.create(req.body);
       return res.status(200).json(category);
     } catch (error) {
       res.status(500).json({ message: "ERROR", error: error.message });
@@ -11,7 +11,7 @@ class CategoryController {
 
   async read(req, res) {
     try {
-      const category = await CategoryModel.find(req.body);
+      const category = await CategoryPriceModel.find(req.body);
       return res.status(200).json(category);
     } catch (error) {
       res.status(500).json({ message: "ERROR", error: error.message });
@@ -22,7 +22,7 @@ class CategoryController {
     try {
       const name = req?.query?.name;
       const regexName = new RegExp(name, "i");
-      const categoryPrice = await CategoryModel.find({
+      const categoryPrice = await CategoryPriceModel.find({
         name: regexName,
       }).sort("name");
       return res.status(200).json(categoryPrice);
@@ -35,7 +35,7 @@ class CategoryController {
   }
   async readNames(req, res) {
     try {
-      const names = await CategoryModel.find({}, { name: 1 });
+      const names = await CategoryPriceModel.find({}, { name: 1 });
       const namesArray = names.map((ia) => ia.name);
       return res.status(200).json(namesArray);
     } catch (error) {
@@ -50,7 +50,7 @@ class CategoryController {
     try {
       const { id } = req.params;
 
-      const foundCategory = await CategoryModel.findById(id);
+      const foundCategory = await CategoryPriceModel.findById(id);
       if (!foundCategory) {
         return res.status(404).json({ message: "Category not found!" });
       }
@@ -66,7 +66,7 @@ class CategoryController {
   async update(req, res) {
     try {
       const { id } = req.params;
-      const foundCategory = await CategoryModel.findById(id);
+      const foundCategory = await CategoryPriceModel.findById(id);
       if (!foundCategory) return res.status(404).json({ message: "Category not found!" });
       const category = await foundCategory.set(req.body).save();
       res.status(200).json(category);
