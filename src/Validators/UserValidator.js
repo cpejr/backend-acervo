@@ -13,7 +13,6 @@ const create = validateRequest({
     name: z.string({ required_error: "O nome é obrigatório" }),
     email: z.string({ required_error: "O email é obrigatório" }),
     imageURL: z.string({ required_error: "A imagem é obrigatória" }),
-    type: z.string({ required_error: "O tipo é obrigatório" }),
   }),
 });
 
@@ -27,9 +26,8 @@ const update = validateRequest({
   body: z.object({
     name: z.string().optional(),
     email: z.string().optional(),
-    password: z.string().optional(),
     imageURL: z.string().optional(),
-    type: z.string().optional(),
+    type: z.boolean().optional(),
   }),
 
   params: z.object({
