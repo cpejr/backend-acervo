@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 
 class UserController {
   async login(req, res) {
-    console.log(req);
     try {
       let userFound = await UserModel.findOne({ email: req.body.email });
 
