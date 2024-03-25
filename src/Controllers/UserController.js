@@ -2,20 +2,26 @@ import UserModel from "../Models/UserModel.js";
 import jwt from "jsonwebtoken";
 
 class UserController {
-  async create(req, res) {
+  async login(req, res) {
     try {
       let userFound = await UserModel.findOne({ email: req.body.email });
 
       if (!userFound) {
         userFound = await UserModel.create(req.body);
+
         await userFound.save();
       }
-      const token = jwt.sign({ userFound }, process.env.JWT_SECRET, {
-        expiresIn: process.env.JWT_EXPIRE_IN,
-      });
+      const token = jwt.sign(
+        {
+          userFound,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: process.env.JWT_EXPIRE_IN }
+      );
+
       return res.status(200).json({ token, user: userFound });
     } catch (error) {
-      res.status(500).json({ message: "ERRO", error: error.message });
+      res.status(500).json({ message: "Error at login", error: error.message });
     }
   }
 
@@ -25,7 +31,7 @@ class UserController {
       const user = await UserModel.findById(id);
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: "ERRO", error: error.message });
+      res.status(500).json({ message: "Error while fetching User", error: error.message });
     }
   }
 
@@ -34,7 +40,7 @@ class UserController {
       const user = await UserModel.find();
       res.status(200).json(user);
     } catch (error) {
-      res.status(500).json({ message: "Error while fethcing Users", error: error.message });
+      res.status(500).json({ message: "Error while fetching Users", error: error.message });
     }
   }
 
@@ -67,4 +73,5 @@ class UserController {
     }
   }
 }
+
 export default new UserController();
