@@ -4,6 +4,7 @@ class MemorialController {
   async create(req, res) {
     try {
       const { title, shortDescription, longDescription, link, ...archives } = req.body;
+
       const archivesArray = Object.values(archives);
 
       const memorial = await MemorialModel.create({
