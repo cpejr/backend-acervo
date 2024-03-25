@@ -12,13 +12,11 @@ const MemorialSchema = new Schema({
   shortDescription: {
     type: String,
     required: true,
-    unique: true,
     trim: true,
   },
   longDescription: {
     type: String,
     required: false,
-    unique: true,
     trim: true,
   },
   link: {
@@ -29,6 +27,14 @@ const MemorialSchema = new Schema({
   archive: {
     type: [String],
     required: false,
+  },
+  characteristics: {
+    type: [String]
+  },
+  date: {
+    type: Date, 
+    default: Date.now,
+    required: true, 
   },
 });
 
