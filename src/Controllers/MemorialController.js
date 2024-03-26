@@ -1,5 +1,5 @@
 import MemorialModel from "../Models/MemorialModel.js";
-
+import ArchiveController from "./ArchiveController.js";
 class MemorialController {
   async create(req, res) {
     try {
@@ -19,14 +19,18 @@ class MemorialController {
       res.status(500).json({ message: "Error while creating archive", error: error.message });
     }
   }
+
   async read(req, res) {
     try {
+      // const result = await ArchiveController.read("Canal de Reclamações.jpg");
+      // console.log(result);
       const memorial = await MemorialModel.find();
       return res.status(200).json(memorial);
     } catch (error) {
       res.status(500).json({ message: "Error while fetching archive", error: error.message });
     }
   }
+
   async update(req, res) {
     try {
       const { id } = req.params;
@@ -42,6 +46,7 @@ class MemorialController {
       res.status(500).json({ message: "Error while updating archive", error: error.message });
     }
   }
+
   async delete(req, res) {
     try {
       const { id } = req.params;
