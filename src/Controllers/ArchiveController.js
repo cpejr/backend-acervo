@@ -1,5 +1,5 @@
 import ArchiveModel from "../Models/ArchiveModel.js";
-import { getArchive } from "../Config/aws.js";
+import { getArchive, sendArchive } from "../Config/Aws.js";
 
 class ArchiveController {
   async read(req, res) {
@@ -11,5 +11,15 @@ class ArchiveController {
       res.status(500).json({ message: "Error while fetching archive", error: error.message });
     }
   }
+  async create(req, res) {
+    try {
+      // const result = sendArchive;
+
+      console.log(req);
+    } catch (error) {
+      res.status(500).json({ message: "error while creating archive", error: error.message });
+    }
+  }
 }
+
 export default new ArchiveController();

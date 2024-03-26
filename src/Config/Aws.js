@@ -40,3 +40,17 @@ export async function getArchive(key) {
     stream.once("error", reject);
   });
 }
+
+export async function sendArchive(file) {
+  const key = uuidv4();
+  const params = {
+    Bucket: bucketName,
+    Body: JSON.stringify({ imagem: file }),
+    Key: key,
+    ContentType: "json",
+    //ACL,
+  };
+
+  await s3.send(new PutObjectCommand(params));
+  return { key, ...file };
+}
