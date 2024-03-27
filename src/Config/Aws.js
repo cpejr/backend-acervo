@@ -55,3 +55,14 @@ export async function sendArchive(file, name) {
 
   return fileUrl;
 }
+
+export async function deleteArchive(key) {
+  if (!key) return;
+
+  const params = {
+    Bucket: bucketName,
+    Key: key,
+  };
+  console.log("deletou aqui");
+  await s3.send(new DeleteObjectCommand(params));
+}

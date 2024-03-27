@@ -6,7 +6,6 @@ class MemorialController {
       const { title, shortDescription, longDescription, link, ...archives } = req.body;
       const archivesArray = Object.values(archives);
       const archiveID = await ArchiveController.create({ file: archivesArray, name: title });
-
       const memorial = await MemorialModel.create({
         title,
         shortDescription,
@@ -16,15 +15,15 @@ class MemorialController {
       });
       return res.status(200).json(memorial);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Error while creating archive", error: error.message });
     }
   }
 
   async read(req, res) {
     try {
-      // const result = await ArchiveController.read("Canal de Reclamações.jpg");
-
       const memorial = await MemorialModel.find();
+
       return res.status(200).json(memorial);
     } catch (error) {
       res.status(500).json({ message: "Error while fetching archive", error: error.message });
@@ -50,11 +49,25 @@ class MemorialController {
   async delete(req, res) {
     try {
       const { id } = req.params;
+      const memorial = await MemorialModel.findById(id);
+      await ArchiveController.deleteArchives(memorial.archive);
       await MemorialModel.findByIdAndDelete(id);
       return res.status(200).json({ messsage: "Archive deleted successfully!" });
     } catch (error) {
       res.status(500).json({ message: "Error while deleting archive", error: error.message });
     }
   }
+
+  async getMemorialImages(req, res) {
+    try {
+      const { id } = req.params;
+      const memorial = await MemorialModel.findById(id);
+      const archivesBase64 = await ArchiveController.getArchivesbyID(memorial.archive);
+      return res.status(200).json(archivesBase64);
+    } catch (error) {
+      res.status(500).json({ message: "Error while deleting archive", error: error.message });
+    }
+  }
 }
+
 export default new MemorialController();

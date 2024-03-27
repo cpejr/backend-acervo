@@ -14,6 +14,7 @@ memorialRoutes
 memorialRoutes
   .route("/:id")
   .put(MemorialValidator.update, MemorialController.update)
-  .delete(MemorialValidator.destroy, MemorialController.delete);
+  .delete(MemorialValidator.destroy, MemorialController.delete)
+  .get(MemorialValidator.read, MemorialController.getMemorialImages);
 
 export default memorialRoutes;
