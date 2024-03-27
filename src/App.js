@@ -12,7 +12,6 @@ app.use(cors());
 app.use(routes);
 app.use(bodyParser.json({ limit: "100mb" }));
 app.use(express.urlencoded({ limit: "100mb", extended: true }));
-console.log("oi meu limite é ");
 
 // Non existing routes
 app.use("*", (req, res, next) => {

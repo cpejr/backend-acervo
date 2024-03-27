@@ -9,13 +9,14 @@ import {
   S3Client,
 } from "@aws-sdk/client-s3";
 import dotenv from "dotenv";
-
+import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 
 const region = process.env.AWS_BUCKET_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 const bucketName = process.env.AWS_BUCKET_NAME;
+const awsLink = process.env.AWS_S3_BASE_URL;
 
 const s3 = new S3Client({
   region: region,
@@ -30,7 +31,6 @@ export async function getArchive(key) {
     Bucket: bucketName,
     Key: key,
   };
-  console.log(params);
   const res = await s3.send(new GetObjectCommand(params));
   const stream = res.Body;
   return new Promise((resolve, reject) => {
@@ -41,16 +41,17 @@ export async function getArchive(key) {
   });
 }
 
-export async function sendArchive(file) {
-  const key = uuidv4();
+export async function sendArchive(file, name) {
+  const key = name + uuidv4();
   const params = {
     Bucket: bucketName,
-    Body: JSON.stringify({ imagem: file }),
+    Body: JSON.stringify({ arquivo: file }),
     Key: key,
     ContentType: "json",
-    //ACL,
   };
 
   await s3.send(new PutObjectCommand(params));
-  return { key, ...file };
+  const fileUrl = `${awsLink}${bucketName}/${key}`;
+
+  return fileUrl;
 }

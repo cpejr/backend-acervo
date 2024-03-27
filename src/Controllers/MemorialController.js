@@ -4,16 +4,15 @@ class MemorialController {
   async create(req, res) {
     try {
       const { title, shortDescription, longDescription, link, ...archives } = req.body;
-      console.log("ta aqui");
       const archivesArray = Object.values(archives);
-      ArchiveController.create(archivesArray);
-      console.log("ta aqui 2 ");
+      const archiveID = await ArchiveController.create({ file: archivesArray, name: title });
+
       const memorial = await MemorialModel.create({
         title,
         shortDescription,
         longDescription,
         link,
-        archive: archivesArray,
+        archive: archiveID,
       });
       return res.status(200).json(memorial);
     } catch (error) {
@@ -23,7 +22,7 @@ class MemorialController {
 
   async read(req, res) {
     try {
-      const result = await ArchiveController.read("Canal de Reclamações.jpg");
+      // const result = await ArchiveController.read("Canal de Reclamações.jpg");
 
       const memorial = await MemorialModel.find();
       return res.status(200).json(memorial);

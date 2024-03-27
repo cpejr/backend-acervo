@@ -13,9 +13,17 @@ class ArchiveController {
   }
   async create(req, res) {
     try {
-      // const result = sendArchive;
+      const files = Array.isArray(req.file) ? req.file : [req.file];
+      const archiveIds = [];
 
-      console.log(req);
+      for (const file of files) {
+        const result = await sendArchive(file, req.name);
+        const url = result;
+
+        const archive = await ArchiveModel.create({ url });
+        archiveIds.push(archive._id);
+      }
+      return archiveIds;
     } catch (error) {
       res.status(500).json({ message: "error while creating archive", error: error.message });
     }

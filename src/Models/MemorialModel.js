@@ -27,7 +27,7 @@ const MemorialSchema = new Schema({
     trim: true,
   },
   archive: {
-    type: [String],
+    type: [Schema.Types.ObjectId],
     required: false,
   },
 });
