@@ -7,9 +7,13 @@ import verifyIsAdm from "../Middlewares/VerifyisAdm.js";
 const memorialRoutes = Router();
 
 memorialRoutes
-  .route("/")
-  .post(verifyJwt, verifyIsAdm, MemorialValidator.create, MemorialController.create)
-  .get(MemorialValidator.read, MemorialController.read);
+  .route("/memorialCards")
+  .post(MemorialValidator.read, MemorialController.read);
+
+  memorialRoutes
+    .route("/")
+    .post(verifyJwt, verifyIsAdm, MemorialValidator.create, MemorialController.create)
+    .get(MemorialValidator.read, MemorialController.read);
 
 memorialRoutes
   .route("/:id")

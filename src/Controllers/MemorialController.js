@@ -24,19 +24,23 @@ class MemorialController {
   async read(req, res) {
     try {
       const selection = req.body;
+      console.log(selection);
 
-      const filters = selection.filters;
-      const sort = selection.order;
-
-      if (filters.length == 0) {
-        const memorial = await MemorialModel.find().sort([[sort, "asc"]]);
-      } else {
-        const memorial = await MemorialModel.find({ characteristics: filters }).sort([
-          [sort, "asc"],
-        ]);
+      if (selection == {}) {
+        const memorial = await MemorialModel.find().sort([["title", "asc"]]);
+        return res.status(200).json(memorial);
       }
 
-      return res.status(200).json(memorial);
+      if (selection.filters.length != 0) {
+        const memorial = await MemorialModel.find()
+          .where("characteristics")
+          .in(selection.filters)
+          .sort([[selection.order, "asc"]]);
+        return res.status(200).json(memorial);
+      } else {
+        const memorial = await MemorialModel.find().sort([[selection.order, "asc"]]);
+        return res.status(200).json(memorial);
+      }
     } catch (error) {
       res.status(500).json({ message: "Error while fetching archive", error: error.message });
     }
