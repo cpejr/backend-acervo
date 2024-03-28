@@ -24,7 +24,6 @@ class MemorialController {
   async read(req, res) {
     try {
       const selection = req.body;
-      console.log(selection);
 
       if (selection == {}) {
         const memorial = await MemorialModel.find().sort([["title", "asc"]]);
@@ -42,7 +41,7 @@ class MemorialController {
         return res.status(200).json(memorial);
       }
     } catch (error) {
-      res.status(500).json({ message: "Error while fetching archive", error: error.message });
+      res.status(500).json({ message: "Error while fetching memorial cards", error: error.message });
     }
   }
   async update(req, res) {
