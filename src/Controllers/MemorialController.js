@@ -3,7 +3,7 @@ import MemorialModel from "../Models/MemorialModel.js";
 class MemorialController {
   async create(req, res) {
     try {
-      const { title, shortDescription, longDescription, link, date, characteristics, ...archives } =
+      const { title, shortDescription, longDescription, link, characteristics, ...archives } =
         req.body;
       const archivesArray = Object.values(archives);
 
@@ -12,7 +12,6 @@ class MemorialController {
         shortDescription,
         longDescription,
         link,
-        date,
         characteristics,
         archive: archivesArray,
       });

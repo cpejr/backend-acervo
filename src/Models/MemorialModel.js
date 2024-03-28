@@ -31,11 +31,6 @@ const MemorialSchema = new Schema({
   characteristics: {
     type: [String]
   },
-  date: {
-    type: Date, 
-    default: Date.now,
-    required: true, 
-  },
 });
 
 const MemorialModel = mongoose.model("memorial", MemorialSchema);

@@ -24,7 +24,6 @@ const create = validateRequest({
       .max(750, { message: "Large description cannot exceed 750 characters" }),
   }),
   link: z.string({ required_error: "The link is required" }),
-  date: z.string({ required_error: "The date is required" }),
 });
 
 const destroy = validateRequest({
@@ -43,7 +42,6 @@ const update = validateRequest({
     shortDescription: z.string().optional(),
     longDescription: z.string().optional(),
     link: z.string().optional(),
-    date: z.string().optional(),
   }),
 });
 
